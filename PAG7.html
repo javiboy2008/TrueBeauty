@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, white, #18b681); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        h1 { font-size: 2rem; margin-bottom: 30px; color: #333; }
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 30px; width: 100%; max-width: 1200px; }
+        .product { background-color: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease; }
+        .product:hover { transform: scale(1.02); }
+        .product img { width: 100%; max-width: 200px; height: auto; margin-bottom: 20px; }
+        .product-name { font-size: 1.2rem; margin-bottom: 10px; color: #333; text-align: justify; }
+        .product-color { font-size: 0.9rem; margin-bottom: 15px; color: #777; text-align: justify; }
+        .product-options { display: flex; flex-direction: column; gap: 10px; }
+        select, button { padding: 10px; width: 100%; max-width: 200px; border: 1px solid #ccc; border-radius: 5px; background-color: #f7f7f7; cursor: pointer; font-size: 1rem; }
+        select:hover, button:hover { background-color: #eaeaea; }
+        button { background-color: #fff236; color: rgb(255, 255, 255); transition: background-color 0.2s ease; }
+        button:hover { background-color: #b4a907; }
+        .buy-button { background-color: #d32f2f; }
+        .buy-button:hover { background-color: #b71c1c; }
+        .nav-buttons { margin-top: 40px; display: flex; justify-content: space-between; width: 100%; max-width: 600px; }
+        .nav-buttons button { background-color: #1e4ff0; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+        .nav-buttons button:hover { background-color: #082ea8; }
+        .next-button { background-color: #007BFF; }
+        .next-button:hover { background-color: #0056b3; }
+        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr; } .nav-buttons { flex-direction: column; gap: 10px; align-items: center; } }
+    </style>
+</head>
+<body>
+
+    <h1>CUIDADO FACIAL </h1>
+
+    <div class="product-grid">
+        <div class="product">
+            <img src="PARCHE.jpeg" alt="RUH Parches para acne">
+            <div class="product-name">RUH Parches para acne 108 Pack, Parches hidrocoloides absorbentes para tratar la erupción de acné</div>
+            <div class="product-color">Precio: $179.99<br> Beneficios: Antiacné</div>
+            <div class="product-options">
+                <select id="cant-1"><option value="1">Cantidad: 1</option><option value="2">Cantidad: 2</option><option value="3">Cantidad: 3</option><option value="4">Cantidad: 4</option></select>
+                <button onclick="agregarAlCarrito('RUH Parches para acne 108 Pack', 'cant-1')">Agregar al carrito</button>
+                <button class="buy-button" onclick="comprarAhora('RUH Parches para acne 108 Pack', 'cant-1')">Comprar</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="RETINOL.jpeg" alt="La Roche Posay Retinol">
+            <div class="product-name">La Roche Posay Retinol B3 Serum Facial Anti-arrugas 30ml</div>
+            <div class="product-color">Precio: $812.20<br> Beneficios: Reduce líneas y arrugas</div>
+            <div class="product-options">
+                <select id="cant-2"><option value="1">Cantidad: 1</option><option value="2">Cantidad: 2</option><option value="3">Cantidad: 3</option><option value="4">Cantidad: 4</option></select>
+                <button onclick="agregarAlCarrito('La Roche Posay Retinol B3 Serum', 'cant-2')">Agregar al carrito</button>
+                <button class="buy-button" onclick="comprarAhora('La Roche Posay Retinol B3 Serum', 'cant-2')">Comprar</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="CERAVE.jpeg" alt="CeraVe Gel Limpiador">
+            <div class="product-name">CeraVe Gel Limpiador Espumoso 473 ml</div>
+            <div class="product-color">Precio: $313.50<br> Beneficios: Control de la grasa</div>
+            <div class="product-options">
+                <select id="cant-3"><option value="1">Cantidad: 1</option><option value="2">Cantidad: 2</option><option value="3">Cantidad: 3</option><option value="4">Cantidad: 4</option></select>
+                <button onclick="agregarAlCarrito('CeraVe Gel Limpiador Espumoso', 'cant-3')">Agregar al carrito</button>
+                <button class="buy-button" onclick="comprarAhora('CeraVe Gel Limpiador Espumoso', 'cant-3')">Comprar</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="NIVEA.jpeg" alt="NIVEA Crema Facial">
+            <div class="product-name">NIVEA Crema Facial Hidratante Aclarante 5 En 1 (200 ml)</div>
+            <div class="product-color">Precio: $96.00<br> Beneficios: Protección solar SPF</div>
+            <div class="product-options">
+                <select id="cant-4"><option value="1">Cantidad: 1</option><option value="2">Cantidad: 2</option><option value="3">Cantidad: 3</option><option value="4">Cantidad: 4</option></select>
+                <button onclick="agregarAlCarrito('NIVEA Crema Facial Aclarante 200ml', 'cant-4')">Agregar al carrito</button>
+                <button class="buy-button" onclick="comprarAhora('NIVEA Crema Facial Aclarante 200ml', 'cant-4')">Comprar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-buttons">
+        <button onclick="location.href='PAG6.html'">← Volver</button>
+        <button class="next-button" onclick="location.href='PAG8.html'">Siguiente →</button>
+    </div>
+
+<script>
+function agregarAlCarrito(nombre, idCantidad) {
+    let cantidad = parseInt(document.getElementById(idCantidad).value);
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let existente = carrito.find(p => p.nombre === nombre);
+    if (existente) { existente.cantidad += cantidad; } 
+    else { carrito.push({ nombre: nombre, cantidad: cantidad }); }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(nombre + " x" + cantidad + " agregado");
+}
+function comprarAhora(nombre, idCantidad) {
+    agregarAlCarrito(nombre, idCantidad);
+    window.location.href = 'PAG11.html';
+}
+</script>
+
+</body>
+</html>

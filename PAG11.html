@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprar</title>
+<style>/* tu mismo css */ 
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(to bottom, #fff, #874f4f);min-height:100vh;padding:20px;display:flex;flex-direction:column;align-items:center}
+h1{margin-bottom:20px}.container{background:white;width:100%;max-width:900px;border-radius:10px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.2)}
+table{width:100%;border-collapse:collapse;margin-top:15px}th,td{border-bottom:1px solid #ddd;padding:10px;text-align:center}th{background:#f5f5f5}
+img.prod{width:60px;height:60px;object-fit:cover;border-radius:5px}
+.btn-menos,.btn-mas{padding:5px 10px;border:none;background:#eee;cursor:pointer;border-radius:5px}.btn-eliminar{background:#d32f2f;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer}
+.total-box{text-align:right;margin-top:20px;font-size:1.3rem;font-weight:bold}
+.pago-box{margin-top:30px;border-top:2px solid #eee;padding-top:20px}.pago-box h3{margin-bottom:10px}
+.opciones-pago{display:flex;gap:15px;margin-bottom:15px}.form-pago{display:none;flex-direction:column;gap:10px;margin-top:15px}
+.form-pago input{padding:10px;border:1px solid #ccc;border-radius:5px;width:100%}
+.btn-comprar-final{background:#1e4ff0;color:white;padding:15px;border:none;width:100%;border-radius:8px;font-size:1.2rem;cursor:pointer;margin-top:15px}
+</style>
+</head>
+<body>
+<h1>COMPRAR</h1>
+<div class="container">
+    <div id="carrito-vacio" style="display:none;text-align:center;">Carrito vacío <a href="PAG4.html">Volver</a></div>
+    <table id="tabla-carrito"><thead><tr><th>Producto</th><th>Cantidad</th><th>Subtotal</th><th>Acción</th></tr></thead><tbody id="lista-productos"></tbody></table>
+    <div class="total-box">Total: $<span id="total">0</span></div>
+
+    <form id="formCompra" method="POST" action="guardar_compra.php" onsubmit="return prepararEnvio()">
+        <div class="pago-box">
+            <h3>¿Cómo quieres pagar? *</h3>
+            <div class="opciones-pago">
+                <label><input type="radio" name="pago" value="tarjeta" checked onchange="mostrarForm()"> Tarjeta</label>
+                <label><input type="radio" name="pago" value="efectivo" onchange="mostrarForm()"> Efectivo</label>
+                <label><input type="radio" name="pago" value="transferencia" onchange="mostrarForm()"> Transferencia</label>
+            </div>
+
+            <div id="form-tarjeta" class="form-pago" style="display:flex">
+                <input type="text" name="nombre_tarjeta" id="nombre_tarjeta" placeholder="Nombre en la tarjeta" required>
+                <input type="text" name="numero_tarjeta" placeholder="Número de tarjeta 0000 0000 0000 0000" required>
+                <div style="display:flex;gap:10px"><input type="text" name="expiracion" placeholder="MM/AA" required><input type="text" name="cvv" placeholder="CVV" required></div>
+            </div>
+            <div id="form-efectivo" class="form-pago">
+                <p>Pagarás al recibir.</p>
+                <input type="text" name="direccion" id="direccion_efectivo" placeholder="Dirección de entrega" >
+            </div>
+            <div id="form-transferencia" class="form-pago">
+                <p>Transfiere a: 1234 5678 9012 - True Beauty</p>
+                <input type="text" name="referencia" id="referencia_trans" placeholder="Comprobante / Referencia" >
+            </div>
+
+            <input type="text" name="nombre_cliente" id="nombre-cliente" placeholder="Tu nombre completo *" required style="margin-top:15px;padding:10px;width:100%;border:1px solid #ccc;border-radius:5px">
+            
+            <input type="hidden" name="carrito_data" id="carrito_data">
+            <input type="hidden" name="total_hidden" id="total_hidden">
+
+            <button type="submit" class="btn-comprar-final">COMPRAR</button>
+        </div>
+    </form>
+</div>
+
+<script>
+const infoProductos = {
+    "CAPTURE TOTALE(50g)": { precio: 450 }, "Dior PRESTIGE(65g)": { precio: 520 },
+    "Maybelline Mascara sky high": { precio: 155.20 }, "Maybelline corrector Instant Age": { precio: 134.00 },
+    "NYX Fat Oil Lip Drip Gloss": { precio: 161.94 }, "La Roche Posay BB Blur 30ml": { precio: 636.75 },
+    "RUH Parches para acne 108 Pack": { precio: 179.99 }, "La Roche Posay Retinol B3 Serum": { precio: 812.20 },
+    "CeraVe Gel Limpiador Espumoso": { precio: 313.50 }, "NIVEA Crema Facial Aclarante 200ml": { precio: 96.00 },
+    "Dior JOY(90ml)": { precio: 2100 }, "Miss Dior(50ml)": { precio: 1850 }, "Forever and ever Dior(102ml)": { precio: 1950 }, "Miss Dior(100ml)": { precio: 2600 },
+    "Eucerin Epigenetic Serum 30ml": { precio: 1166.00 }, "Loreal Revitalift Acido Hialuronico": { precio: 186.00 },
+    "MIST JEWEL Set Brochas bambu 11pcs": { precio: 194.00 }, "Jasinber Set 12 esponjas triangulares": { precio: 97.20 }
+};
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+function renderCarrito(){
+    let tbody=document.getElementById('lista-productos'); let total=0; tbody.innerHTML="";
+    if(carrito.length===0){document.getElementById('tabla-carrito').style.display="none";document.getElementById('carrito-vacio').style.display="block";return;}
+    carrito.forEach((p,i)=>{
+        let info=infoProductos[p.nombre]||{precio:100}; let sub=info.precio*p.cantidad; total+=sub;
+        tbody.innerHTML+=`<tr><td>${p.nombre}</td><td>${p.cantidad}</td><td>$${sub.toFixed(2)}</td><td><button class="btn-eliminar" onclick="carrito.splice(${i},1);localStorage.setItem('carrito',JSON.stringify(carrito));renderCarrito()">X</button></td></tr>`;
+    });
+    document.getElementById('total').innerText=total.toFixed(2);
+}
+function mostrarForm(){
+    document.querySelectorAll('.form-pago').forEach(f=>f.style.display="none");
+    let m=document.querySelector('input[name="pago"]:checked').value;
+    document.getElementById('form-'+m).style.display="flex";
+    
+    document.querySelectorAll('#form-tarjeta input').forEach(i=>i.required = (m==='tarjeta'));
+    document.getElementById('direccion_efectivo').required = (m==='efectivo');
+    document.getElementById('referencia_trans').required = (m==='transferencia');
+}
+function prepararEnvio(){
+    if(carrito.length===0){alert("Carrito vacío");return false;}
+    document.getElementById('carrito_data').value = JSON.stringify(carrito);
+    document.getElementById('total_hidden').value = document.getElementById('total').innerText;
+    return true;
+}
+renderCarrito(); mostrarForm();
+</script>
+</body>
+</html>
