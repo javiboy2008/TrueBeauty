@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueBeauty - Admin</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+  body{background:#d9f0ff;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+  a{text-decoration:none;color:inherit}
+
+  /* BARRA SUPERIOR */
+  .top{background:white;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .logo{font-size:28px;font-weight:bold;color:#cf9bb1}
+  .logo span{color:#333;font-size:14px;display:block;font-weight:normal;letter-spacing:3px}
+  .icons{display:flex;gap:12px}
+  .icono{background:#f2f9ff;border:none;width:48px;height:48px;border-radius:50%;font-size:24px;cursor:pointer}
+  .icono:hover{background:#cf9bb1}
+
+  .contenedor{display:flex;flex:1;overflow:hidden}
+
+  /* CENTRO */
+  .centro{flex:1;padding:20px;overflow-y:auto}
+  .bienvenido{background:white;border-radius:20px;padding:20px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+  .bienvenido h1{font-size:28px;color:#333}
+  .bienvenido h1 span{color:#cf9bb1}
+  .bienvenido p{color:#777;margin-top:5px}
+
+  .tarjetas{display:flex;gap:15px;margin-top:18px;flex-wrap:wrap}
+  .card{background:white;flex:1;min-width:140px;border-radius:16px;padding:15px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .card b{font-size:24px;color:#cf9bb1;display:block}
+  .card span{color:#777;font-size:13px}
+
+  .grafica{background:white;border-radius:20px;padding:20px;margin-top:18px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+  .grafica h2{font-size:18px;margin-bottom:15px}
+  .barras{display:flex;align-items:flex-end;gap:18px;height:180px;justify-content:space-around;border-bottom:2px solid #eee}
+  .col{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .barra{width:38px;background:linear-gradient(#ff8fc0,#cf9bb1);border-radius:10px 10px 0 0}
+  .col span{font-size:12px;color:#666}
+
+  /* MENU LADO DERECHO */
+  .menu{width:230px;background:white;padding:15px;display:flex;flex-direction:column;gap:10px;box-shadow:-2px 0 8px rgba(0,0,0,.08);overflow-y:auto}
+  .menu h3{text-align:center;color:#cf9bb1;margin-bottom:5px}
+  .menu a{display:block;background:#f2f9ff;padding:13px;border-radius:14px;font-size:15px;font-weight:bold}
+  .menu a:hover{background:#cf9bb1;color:white}
+  .menu .activo{background:#cf9bb1;color:white}
+  .menu .agregar{background:#ffe6f1;color:#cf9bb1;text-align:center}
+</style>
+</head>
+<body>
+
+  <!-- ARRIBA - BOTONES -->
+  <div class="top">
+    <div class="logo">TrueBeauty<span>ADMIN PANEL</span></div>
+    <div class="icons">
+      <!-- CAMBIA EL NOMBRE DEL ARCHIVO SI EL TUYO SE LLAMA DIFERENTE -->
+      <a href="validar_cuenta.html"><button class="icono" title="Perfil">👤</button></a>
+      <a href="PAG4.html"><button class="icono" title="Notificaciones">🔔</button></a>
+      <a href="PAG11.html"><button class="icono" title="Carrito">🛒</button></a>
+    </div>
+  </div>
+
+  <div class="contenedor">
+    <!-- CENTRO -->
+    <div class="centro">
+      <div class="bienvenido">
+        <h1>Bienvenido, <span>Admin ✨</span></h1>
+        <p>Aquí puedes controlar toda tu página TrueBeauty.</p>
+      </div>
+
+      <div class="tarjetas">
+        <div class="card"><b>$12,450</b><span>Ventas esta semana</span></div>
+        <div class="card"><b>86</b><span>Pedidos</span></div>
+        <div class="card"><b>120</b><span>Productos</span></div>
+        <div class="card"><b>54</b><span>Clientes nuevos</span></div>
+      </div>
+
+      <div class="grafica">
+        <h2>📊 Ventas a la semana</h2>
+        <div class="barras">
+          <div class="col"><div class="barra" style="height:60px"></div><span>Lun</span><b>$800</b></div>
+          <div class="col"><div class="barra" style="height:90px"></div><span>Mar</span><b>$1,200</b></div>
+          <div class="col"><div class="barra" style="height:70px"></div><span>Mié</span><b>$950</b></div>
+          <div class="col"><div class="barra" style="height:130px"></div><span>Jue</span><b>$2,100</b></div>
+          <div class="col"><div class="barra" style="height:110px"></div><span>Vie</span><b>$1,800</b></div>
+          <div class="col"><div class="barra" style="height:150px"></div><span>Sáb</span><b>$3,400</b></div>
+          <div class="col"><div class="barra" style="height:120px"></div><span>Dom</span><b>$2,200</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LADO DERECHO - BOTONES QUE MANDAN A OTRAS PAGINAS -->
+    <div class="menu">
+      <h3>Categorías</h3>
+      <a href="PAG5.html" class="activo">💇‍♀️ Cabello</a>
+      <a href="PAG6.html">💄 Maquillaje</a>
+      <a href="PAG8.html">🌸 Perfume</a>
+      <a href="PAG9.html">🔥 Tendencia</a>
+      <a href="PAG10.html">🖌️ Brochas y Esponjas</a>
+      <a href="PAG7.html">🧴 Skinquer</a>
+      <a href="PAG11.html" class="agregar">➕ Carrito</a>
+    </div>
+  </div>
+
+</body>
+</html>
