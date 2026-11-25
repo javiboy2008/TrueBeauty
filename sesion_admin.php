@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="contrasena">Contraseña</label>
             <input
-                type="text"
+                type="password"
                 id="contrasena"
                 name="contrasena"
                 value="admin123"
