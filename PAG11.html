@@ -126,5 +126,16 @@ function prepararEnvio(){
 }
 renderCarrito(); mostrarForm();
 </script>
+
+<script>
+function abrirMenu(e){
+    e.stopPropagation();
+    document.getElementById('miMenu').classList.toggle('mostrar');
+}
+document.addEventListener('click', function(){
+    document.getElementById('miMenu').classList.remove('mostrar');
+});
+</script>
+
 </body>
 </html>
