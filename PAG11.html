@@ -16,8 +16,39 @@ img.prod{width:60px;height:60px;object-fit:cover;border-radius:5px}
 .form-pago input{padding:10px;border:1px solid #ccc;border-radius:5px;width:100%}
 .btn-comprar-final{background:#1e4ff0;color:white;padding:15px;border:none;width:100%;border-radius:8px;font-size:1.2rem;cursor:pointer;margin-top:15px}
 </style>
+
+<style>
+.menu-nav{width:100%;max-width:900px;background:#874f4f;border-radius:10px;padding:10px 15px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;position:relative;z-index:10}
+.menu-logo{color:white;font-weight:bold;font-size:1.1rem;margin-right:auto;text-decoration:none}
+.dropdown{position:relative}
+.btn-menu{background:white;color:#874f4f;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:bold;font-size:1rem}
+.btn-carrito-menu{background:#1e4ff0;color:white;text-decoration:none;padding:10px 16px;border-radius:8px;font-weight:bold;font-size:1rem}
+.dropdown-contenido{display:none;position:absolute;top:110%;left:0;background:white;min-width:220px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.3);overflow:hidden;flex-direction:column}
+.dropdown-contenido.mostrar{display:flex}
+.dropdown-contenido a{padding:12px 15px;text-decoration:none;color:#333;border-bottom:1px solid #eee;display:block}
+.dropdown-contenido a:hover{background:#f5e6e6;color:#874f4f}
+</style>
+
 </head>
 <body>
+
+<nav class="menu-nav">
+    <a href="PAG4.html" class="menu-logo">True Beauty</a>
+    <div class="dropdown">
+        <button class="btn-menu" onclick="abrirMenu(event)">☰ Categorías ▼</button>
+        <div class="dropdown-contenido" id="miMenu">
+            <a href="PAG5.html">Cabello</a>
+            <a href="PAG6.html">Maquillajes</a>
+            <a href="PAG7.html">Skincare</a>
+            <a href="PAG8.html">Perfumes</a>
+            <a href="PAG9.html">Tendencias</a>
+            <a href="PAG10.html">Broches y Esponjas</a>
+        </div>
+    </div>
+    <a href="PAG11.html" class="btn-carrito-menu">🛒 Carrito</a>
+</nav>
+
+
 <h1>COMPRAR</h1>
 <div class="container">
     <div id="carrito-vacio" style="display:none;text-align:center;">Carrito vacío <a href="PAG4.html">Volver</a></div>
