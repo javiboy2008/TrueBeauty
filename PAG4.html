@@ -133,5 +133,15 @@
         © 2024 TRUE BEAUTY
     </footer>
 
+<script>
+    function cerrarSesion() {
+        if (confirm("¿Estás seguro que quieres cerrar sesión?")) {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = "validar_cuenta.php";
+        }
+    }
+</script>
+
 </body>
 </html>
