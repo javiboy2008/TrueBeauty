@@ -105,6 +105,9 @@
             <img src="PERFIL.jpeg" alt="Perfil" class="profile-icon" onclick="location.href='validar_cuenta.html'">
             <img src="CARA.jpeg" alt="Cara" class="profile-icon" onclick="location.href='PAG1.html'">
     </div>
+    <a href="PAG1.html" style="position: fixed; top: 15px; right: 15px; background-color: rgb(245, 132, 132); color: rgb(0, 0, 0); text-decoration: none; padding: 10px 20px; font-size: 14px; border-radius: 8px; font-weight: bold; font-family: Arial; z-index: 100;">
+    CERRAR SESIÓN
+</a>
     </div>
 
     <div class="rectangles-container">
@@ -132,16 +135,6 @@
     <footer>
         © 2024 TRUE BEAUTY
     </footer>
-
-<script>
-    function cerrarSesion() {
-        if (confirm("¿Estás seguro que quieres cerrar sesión?")) {
-            localStorage.clear();
-            sessionStorage.clear();
-            window.location.href = "validar_cuenta.php";
-        }
-    }
-</script>
 
 </body>
 </html>
